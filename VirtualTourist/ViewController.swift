@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var placeholderView: UIView!
 
-    var shown: Bool = false
+    var shown: Bool = true
     
     @IBAction func updateViews(_ sender: UIBarButtonItem) {
         let constraint = view.constraints.first {$0.identifier == "bottom"}
