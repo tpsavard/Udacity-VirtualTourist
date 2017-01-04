@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6Fa-11-JVZ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -29,7 +29,7 @@
         <!--Virtual Tourist-->
         <scene sceneID="Lbc-nM-3iz">
             <objects>
-                <viewController id="cG1-Nk-aJX" sceneMemberID="viewController">
+                <viewController id="cG1-Nk-aJX" customClass="ViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NtA-sa-0wF"/>
                         <viewControllerLayoutGuide type="bottom" id="wkO-sN-FVc"/>
@@ -38,19 +38,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dFo-JJ-UI3">
-                                <rect key="frame" x="-4" y="64" width="383" height="603"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vuF-8F-tmm">
+                                <rect key="frame" x="-4" y="539" width="383" height="128"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="Q4J-ol-e91"/>
+                                </constraints>
+                            </view>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gDp-HZ-KRx">
+                                <rect key="frame" x="-4" y="64" width="383" height="475"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wkO-sN-FVc" firstAttribute="top" secondItem="dFo-JJ-UI3" secondAttribute="bottom" id="9bQ-RF-Cqz"/>
-                            <constraint firstItem="dFo-JJ-UI3" firstAttribute="leading" secondItem="sk3-fi-vvg" secondAttribute="leadingMargin" constant="-20" id="MPw-Jj-9za"/>
-                            <constraint firstItem="dFo-JJ-UI3" firstAttribute="top" secondItem="NtA-sa-0wF" secondAttribute="bottom" id="aBY-Df-32C"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="dFo-JJ-UI3" secondAttribute="trailing" constant="-20" id="mYu-2t-8sK"/>
+                            <constraint firstItem="gDp-HZ-KRx" firstAttribute="leading" secondItem="sk3-fi-vvg" secondAttribute="leadingMargin" constant="-20" id="DP3-6t-9aS"/>
+                            <constraint firstItem="gDp-HZ-KRx" firstAttribute="top" secondItem="NtA-sa-0wF" secondAttribute="bottom" id="Izp-n2-egg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gDp-HZ-KRx" secondAttribute="trailing" constant="-20" id="KKG-gN-mrM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vuF-8F-tmm" secondAttribute="trailing" constant="-20" id="To7-pv-dOP"/>
+                            <constraint firstItem="vuF-8F-tmm" firstAttribute="leading" secondItem="sk3-fi-vvg" secondAttribute="leadingMargin" constant="-20" id="XAf-qA-Nhp"/>
+                            <constraint firstItem="vuF-8F-tmm" firstAttribute="top" secondItem="gDp-HZ-KRx" secondAttribute="bottom" id="bjc-2s-1Vr"/>
+                            <constraint firstItem="wkO-sN-FVc" firstAttribute="top" secondItem="vuF-8F-tmm" secondAttribute="bottom" identifier="bottom" id="goB-xv-ruG"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Virtual Tourist" id="zeF-6X-8cp"/>
+                    <navigationItem key="navigationItem" title="Virtual Tourist" id="zeF-6X-8cp">
+                        <barButtonItem key="rightBarButtonItem" systemItem="play" id="PD6-To-qrL">
+                            <connections>
+                                <action selector="updateViews:" destination="cG1-Nk-aJX" id="UMZ-Tt-4mm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="gDp-HZ-KRx" id="Nov-6i-kwS"/>
+                        <outlet property="placeholderView" destination="vuF-8F-tmm" id="qBv-ha-2li"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jqj-Eo-LMo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

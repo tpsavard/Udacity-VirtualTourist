@@ -15,6 +15,7 @@
 		01A506D41E1C50CE0080375B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01A506D21E1C50CE0080375B /* LaunchScreen.storyboard */; };
 		01A506DF1E1C50CE0080375B /* VirtualTouristTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A506DE1E1C50CE0080375B /* VirtualTouristTests.swift */; };
 		01A506EA1E1C50CE0080375B /* VirtualTouristUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A506E91E1C50CE0080375B /* VirtualTouristUITests.swift */; };
+		01C396391E1D72C6003FE0A1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C396381E1D72C6003FE0A1 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		01A506E51E1C50CE0080375B /* VirtualTouristUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VirtualTouristUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01A506E91E1C50CE0080375B /* VirtualTouristUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualTouristUITests.swift; sourceTree = "<group>"; };
 		01A506EB1E1C50CE0080375B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01C396381E1D72C6003FE0A1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01C396391E1D72C6003FE0A1 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +86,7 @@
 				01A506DD1E1C50CE0080375B /* VirtualTouristTests */,
 				01A506E81E1C50CE0080375B /* VirtualTouristUITests */,
 				01A506C41E1C50CE0080375B /* Products */,
+				01C396371E1D72C6003FE0A1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -150,6 +154,14 @@
 				01A506D21E1C50CE0080375B /* LaunchScreen.storyboard */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		01C396371E1D72C6003FE0A1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				01C396381E1D72C6003FE0A1 /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -533,6 +545,7 @@
 				01A506F01E1C50CE0080375B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		01A506F11E1C50CE0080375B /* Build configuration list for PBXNativeTarget "VirtualTouristTests" */ = {
 			isa = XCConfigurationList;
@@ -541,6 +554,7 @@
 				01A506F31E1C50CE0080375B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		01A506F41E1C50CE0080375B /* Build configuration list for PBXNativeTarget "VirtualTouristUITests" */ = {
 			isa = XCConfigurationList;
@@ -549,6 +563,7 @@
 				01A506F61E1C50CE0080375B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

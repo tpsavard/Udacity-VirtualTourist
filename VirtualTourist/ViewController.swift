@@ -7,19 +7,26 @@
 //
 
 import UIKit
+import MapKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var placeholderView: UIView!
+
+    var shown: Bool = false
+    
+    @IBAction func updateViews(_ sender: UIBarButtonItem) {
+        let constraint = view.constraints.first {$0.identifier == "bottom"}
+        if let constraint = constraint {
+            constraint.constant = shown ? -128 : 0
+            shown = !shown
+            
+            UIView.animate(withDuration: 0.35) {
+                self.view.layoutIfNeeded()
+            }
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
+    
 }
 
