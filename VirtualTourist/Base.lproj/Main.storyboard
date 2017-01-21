@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6Fa-11-JVZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1Sm-8u-QYf">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,71 +10,44 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="YOO-WX-fXA">
+        <!--View Controller-->
+        <scene sceneID="iQl-Ou-VYn">
             <objects>
-                <navigationController id="6Fa-11-JVZ" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cfU-Ia-33W">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="cG1-Nk-aJX" kind="relationship" relationship="rootViewController" id="oRD-CP-FF0"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uw0-Ax-9e7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-478" y="41"/>
-        </scene>
-        <!--Virtual Tourist-->
-        <scene sceneID="Lbc-nM-3iz">
-            <objects>
-                <viewController id="cG1-Nk-aJX" customClass="ViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1Sm-8u-QYf" customClass="ViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="NtA-sa-0wF"/>
-                        <viewControllerLayoutGuide type="bottom" id="wkO-sN-FVc"/>
+                        <viewControllerLayoutGuide type="top" id="Oy1-i1-p3J"/>
+                        <viewControllerLayoutGuide type="bottom" id="5eo-Ss-GvG"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="sk3-fi-vvg">
+                    <view key="view" contentMode="scaleToFill" id="wrs-aH-kCy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vuF-8F-tmm">
-                                <rect key="frame" x="-4" y="539" width="383" height="128"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c47-Mg-CQx">
+                                <rect key="frame" x="-4" y="667" width="383" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="Q4J-ol-e91"/>
+                                    <constraint firstAttribute="height" constant="128" id="sCC-94-MEg"/>
                                 </constraints>
                             </view>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gDp-HZ-KRx">
-                                <rect key="frame" x="-4" y="64" width="383" height="475"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eNw-oa-NNm">
+                                <rect key="frame" x="-4" y="20" width="383" height="647"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="gDp-HZ-KRx" firstAttribute="leading" secondItem="sk3-fi-vvg" secondAttribute="leadingMargin" constant="-20" id="DP3-6t-9aS"/>
-                            <constraint firstItem="gDp-HZ-KRx" firstAttribute="top" secondItem="NtA-sa-0wF" secondAttribute="bottom" id="Izp-n2-egg"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="gDp-HZ-KRx" secondAttribute="trailing" constant="-20" id="KKG-gN-mrM"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="vuF-8F-tmm" secondAttribute="trailing" constant="-20" id="To7-pv-dOP"/>
-                            <constraint firstItem="vuF-8F-tmm" firstAttribute="leading" secondItem="sk3-fi-vvg" secondAttribute="leadingMargin" constant="-20" id="XAf-qA-Nhp"/>
-                            <constraint firstItem="vuF-8F-tmm" firstAttribute="top" secondItem="gDp-HZ-KRx" secondAttribute="bottom" id="bjc-2s-1Vr"/>
-                            <constraint firstItem="wkO-sN-FVc" firstAttribute="top" secondItem="vuF-8F-tmm" secondAttribute="bottom" identifier="bottom" id="goB-xv-ruG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="c47-Mg-CQx" secondAttribute="trailing" constant="-20" id="0ov-vF-5Ym"/>
+                            <constraint firstItem="c47-Mg-CQx" firstAttribute="leading" secondItem="wrs-aH-kCy" secondAttribute="leadingMargin" constant="-20" id="1la-WT-U90"/>
+                            <constraint firstItem="eNw-oa-NNm" firstAttribute="top" secondItem="Oy1-i1-p3J" secondAttribute="bottom" id="7Q7-3K-UJt"/>
+                            <constraint firstItem="5eo-Ss-GvG" firstAttribute="top" secondItem="c47-Mg-CQx" secondAttribute="bottom" constant="-128" identifier="bottom" id="Nn7-ry-lPj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="eNw-oa-NNm" secondAttribute="trailing" constant="-20" id="Sxg-lW-PrQ"/>
+                            <constraint firstItem="c47-Mg-CQx" firstAttribute="top" secondItem="eNw-oa-NNm" secondAttribute="bottom" id="azH-l7-RL8"/>
+                            <constraint firstItem="eNw-oa-NNm" firstAttribute="leading" secondItem="wrs-aH-kCy" secondAttribute="leadingMargin" constant="-20" id="zDr-md-FH1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Virtual Tourist" id="zeF-6X-8cp">
-                        <barButtonItem key="rightBarButtonItem" systemItem="play" id="PD6-To-qrL">
-                            <connections>
-                                <action selector="updateViews:" destination="cG1-Nk-aJX" id="UMZ-Tt-4mm"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="mapView" destination="gDp-HZ-KRx" id="Nov-6i-kwS"/>
-                        <outlet property="placeholderView" destination="vuF-8F-tmm" id="qBv-ha-2li"/>
-                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jqj-Eo-LMo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9qy-xq-AwT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="396" y="41"/>
+            <point key="canvasLocation" x="397.60000000000002" y="689.5052473763119"/>
         </scene>
     </scenes>
 </document>
