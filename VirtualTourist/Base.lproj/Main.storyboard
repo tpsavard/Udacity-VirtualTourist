@@ -63,7 +63,28 @@
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🌅" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k97-Rz-FC6">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I3U-Eg-fsR">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                        </imageView>
+                                                    </subviews>
                                                 </view>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="I3U-Eg-fsR" secondAttribute="trailing" id="2Lh-ec-f5E"/>
+                                                    <constraint firstItem="k97-Rz-FC6" firstAttribute="top" secondItem="82s-IL-Ss4" secondAttribute="top" id="8yc-NJ-bvZ"/>
+                                                    <constraint firstAttribute="bottom" secondItem="k97-Rz-FC6" secondAttribute="bottom" id="Chx-Ja-QDi"/>
+                                                    <constraint firstAttribute="bottom" secondItem="I3U-Eg-fsR" secondAttribute="bottom" id="MAZ-vj-NeA"/>
+                                                    <constraint firstItem="k97-Rz-FC6" firstAttribute="leading" secondItem="82s-IL-Ss4" secondAttribute="leading" id="MkJ-t1-uuk"/>
+                                                    <constraint firstAttribute="trailing" secondItem="k97-Rz-FC6" secondAttribute="trailing" id="VGc-ZZ-xct"/>
+                                                    <constraint firstItem="I3U-Eg-fsR" firstAttribute="leading" secondItem="82s-IL-Ss4" secondAttribute="leading" id="jtp-Yt-R6e"/>
+                                                    <constraint firstItem="I3U-Eg-fsR" firstAttribute="top" secondItem="82s-IL-Ss4" secondAttribute="top" id="rQb-gF-edd"/>
+                                                </constraints>
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
