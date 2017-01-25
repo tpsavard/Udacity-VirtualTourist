@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1Sm-8u-QYf">
-    <device id="retina4_0" orientation="landscape">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,22 +19,36 @@
                         <viewControllerLayoutGuide type="bottom" id="5eo-Ss-GvG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wrs-aH-kCy">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c47-Mg-CQx">
-                                <rect key="frame" x="0.0" y="192" width="568" height="128"/>
+                                <rect key="frame" x="-4" y="312" width="328" height="256"/>
                                 <subviews>
                                     <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFj-1M-Vff">
-                                        <rect key="frame" x="0.0" y="84" width="568" height="44"/>
+                                        <rect key="frame" x="0.0" y="212" width="328" height="44"/>
                                         <items>
-                                            <barButtonItem systemItem="refresh" id="Qsw-T2-7Fi"/>
+                                            <barButtonItem systemItem="stop" id="cGN-6k-PEV">
+                                                <connections>
+                                                    <action selector="close:" destination="1Sm-8u-QYf" id="O5Z-6L-LS2"/>
+                                                </connections>
+                                            </barButtonItem>
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="cdt-Yu-3z7"/>
-                                            <barButtonItem systemItem="stop" id="cGN-6k-PEV"/>
+                                            <barButtonItem systemItem="refresh" id="Qsw-T2-7Fi">
+                                                <connections>
+                                                    <action selector="refresh:" destination="1Sm-8u-QYf" id="8Pa-oP-A5Z"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="GBq-qm-DW0"/>
+                                            <barButtonItem systemItem="trash" id="E8N-DP-M5a">
+                                                <connections>
+                                                    <action selector="remove:" destination="1Sm-8u-QYf" id="PXR-iN-L4e"/>
+                                                </connections>
+                                            </barButtonItem>
                                         </items>
                                     </toolbar>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gyh-4V-Szm">
-                                        <rect key="frame" x="0.0" y="0.0" width="568" height="84"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="328" height="212"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bb8-s8-4cJ">
                                             <size key="itemSize" width="50" height="50"/>
@@ -43,7 +57,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="82s-IL-Ss4">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photocell" id="82s-IL-Ss4">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -63,13 +77,18 @@
                                     <constraint firstItem="PFj-1M-Vff" firstAttribute="top" secondItem="gyh-4V-Szm" secondAttribute="bottom" id="JLP-6w-ac4"/>
                                     <constraint firstAttribute="trailing" secondItem="PFj-1M-Vff" secondAttribute="trailing" id="UFP-Dq-PE5"/>
                                     <constraint firstItem="gyh-4V-Szm" firstAttribute="leading" secondItem="c47-Mg-CQx" secondAttribute="leading" id="fVd-Lv-xhJ"/>
-                                    <constraint firstAttribute="height" constant="256" id="sCC-94-MEg">
+                                    <constraint firstAttribute="height" constant="256" identifier="height" id="sCC-94-MEg">
                                         <variation key="heightClass=compact-widthClass=compact" constant="128"/>
                                     </constraint>
                                 </constraints>
                             </view>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eNw-oa-NNm">
-                                <rect key="frame" x="0.0" y="20" width="568" height="172"/>
+                                <rect key="frame" x="-4" y="20" width="328" height="292"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outlet property="delegate" destination="1Sm-8u-QYf" id="hHV-hO-9lt"/>
+                                    <outletCollection property="gestureRecognizers" destination="O0N-7m-2nh" appends="YES" id="sE3-10-yXT"/>
+                                </connections>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -83,8 +102,17 @@
                             <constraint firstItem="eNw-oa-NNm" firstAttribute="leading" secondItem="wrs-aH-kCy" secondAttribute="leadingMargin" constant="-20" id="zDr-md-FH1"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="detailView" destination="c47-Mg-CQx" id="AqA-tD-Pt9"/>
+                        <outlet property="mapView" destination="eNw-oa-NNm" id="sJ0-oT-hYO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9qy-xq-AwT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="O0N-7m-2nh">
+                    <connections>
+                        <action selector="selectMapLocation:" destination="1Sm-8u-QYf" id="bQD-at-AVN"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="397.18309859154931" y="688.125"/>
         </scene>
