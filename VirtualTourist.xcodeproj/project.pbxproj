@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		018D55921E3963FF003312AC /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018D55911E3963FF003312AC /* PhotoCell.swift */; };
 		01A506C71E1C50CE0080375B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A506C61E1C50CE0080375B /* AppDelegate.swift */; };
 		01A506C91E1C50CE0080375B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A506C81E1C50CE0080375B /* ViewController.swift */; };
 		01A506CC1E1C50CE0080375B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01A506CA1E1C50CE0080375B /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		018D55911E3963FF003312AC /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		01A506C31E1C50CE0080375B /* VirtualTourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualTourist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01A506C61E1C50CE0080375B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01A506C81E1C50CE0080375B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				01A506C81E1C50CE0080375B /* ViewController.swift */,
+				018D55911E3963FF003312AC /* PhotoCell.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				018D55921E3963FF003312AC /* PhotoCell.swift in Sources */,
 				01A506C91E1C50CE0080375B /* ViewController.swift in Sources */,
 				01A506C71E1C50CE0080375B /* AppDelegate.swift in Sources */,
 				01A506CF1E1C50CE0080375B /* VirtualTourist.xcdatamodeld in Sources */,

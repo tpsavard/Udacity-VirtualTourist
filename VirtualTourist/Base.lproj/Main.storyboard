@@ -57,7 +57,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photocell" id="82s-IL-Ss4">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photocell" id="82s-IL-Ss4" customClass="PhotoCell" customModule="VirtualTourist" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -85,8 +85,14 @@
                                                     <constraint firstItem="I3U-Eg-fsR" firstAttribute="leading" secondItem="82s-IL-Ss4" secondAttribute="leading" id="jtp-Yt-R6e"/>
                                                     <constraint firstItem="I3U-Eg-fsR" firstAttribute="top" secondItem="82s-IL-Ss4" secondAttribute="top" id="rQb-gF-edd"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outlet property="PhotoView" destination="I3U-Eg-fsR" id="3LD-UW-c0c"/>
+                                                </connections>
                                             </collectionViewCell>
                                         </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="1Sm-8u-QYf" id="kTK-jX-dIq"/>
+                                        </connections>
                                     </collectionView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -124,6 +130,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="detailCollectionView" destination="gyh-4V-Szm" id="ruG-bg-9AN"/>
                         <outlet property="detailView" destination="c47-Mg-CQx" id="AqA-tD-Pt9"/>
                         <outlet property="mapView" destination="eNw-oa-NNm" id="sJ0-oT-hYO"/>
                     </connections>

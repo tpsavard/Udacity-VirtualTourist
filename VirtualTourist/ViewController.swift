@@ -9,10 +9,13 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController, MKMapViewDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var detailView: UIView!
+    @IBOutlet weak var detailCollectionView: UICollectionView!
+    
+    var photoCount: Int = 10
 
     // MARK:- View Controller Methods
     
@@ -45,6 +48,26 @@ class ViewController: UIViewController, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         print("Map view annotation deselected")
         moveDetailView(show: false, animate: true)
+    }
+    
+    // MARK:- Collection View Data Source Methods
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photoCount
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // Get a fresh cell
+        let reuseIdentifier: String = "photocell"
+        let cell: PhotoCell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PhotoCell
+
+        // Get the image to display
+        let photo: UIImage? = nil
+        
+        // Decorate & return the cell
+        cell.PhotoView.image = photo
+
+        return cell
     }
     
     // MARK:- UI Methods
@@ -114,6 +137,22 @@ class ViewController: UIViewController, MKMapViewDelegate {
                 self.view.layoutIfNeeded()
             }
         }
+    }
+    
+    func refreshDetailView() {
+        
+    }
+    
+    func prepopulateDetailView(count: Int) {
+        
+    }
+    
+    func populateCell(indexPath: NSIndexPath, content: UIImage) {
+        
+    }
+    
+    func finishRefresh() {
+        
     }
     
 }
