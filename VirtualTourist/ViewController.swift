@@ -21,6 +21,17 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
     
     override func viewWillAppear(_ animated: Bool) {
         moveDetailView(show: false, animate: false)
+        
+        // Re-center the map view
+        if let rawCoordinates: (Double, Double) = DataController.getMapView() {
+            let coordinates: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: rawCoordinates.0, longitude: rawCoordinates.1)
+            mapView.setCenter(coordinates, animated: false)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        // Save the map center point
+        DataController.saveMapView(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
     }
     
     // MARK:- Map View Delegate Methods
