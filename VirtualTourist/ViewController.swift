@@ -14,8 +14,6 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var detailView: UIView!
     @IBOutlet weak var detailCollectionView: UICollectionView!
-    
-    var photoCount: Int = 10
 
     // MARK:- View Controller Methods
     
@@ -64,7 +62,8 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
     // MARK:- Collection View Data Source Methods
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photoCount
+        // TODO: Return the number of photos associated with the selected location
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -96,6 +95,8 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
             annotation.coordinate = coordinate
             mapView.addAnnotation(annotation)
             mapView.selectAnnotation(annotation, animated: false)
+            
+            // TODO: Update the detail view
             
             // Show the detail view
             moveDetailView(show: true, animate: true)
@@ -151,19 +152,23 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
     }
     
     func refreshDetailView() {
+        // Clear out the old photos
         
+        // Start the network indicator
+        
+        // Load the new photos
     }
     
     func prepopulateDetailView(count: Int) {
-        
+        // Refresh the count of photos
     }
     
     func populateCell(indexPath: NSIndexPath, content: UIImage) {
-        
+        // Referesh the contents of the photo cell
     }
     
     func finishRefresh() {
-        
+        // End the network indicator
     }
     
 }
