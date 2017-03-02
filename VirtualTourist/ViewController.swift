@@ -8,12 +8,16 @@
 
 import UIKit
 import MapKit
+import CoreData
 
 class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var detailView: UIView!
     @IBOutlet weak var detailCollectionView: UICollectionView!
+    
+    var managedContext: NSManagedObjectContext?
+    var selectedCoordinates: CLLocationCoordinate2D?
 
     // MARK:- View Controller Methods
     
@@ -24,6 +28,11 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
         if let rawCoordinates: (Double, Double) = DataController.getMapView() {
             let coordinates: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: rawCoordinates.0, longitude: rawCoordinates.1)
             mapView.setCenter(coordinates, animated: false)
+        }
+        
+        // Get the Core Data context
+        if let appDelegate: AppDelegate = UIApplication.shared.delegate as? AppDelegate {
+            managedContext = appDelegate.persistentContainer.viewContext
         }
     }
     
@@ -51,6 +60,10 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         print("Map view annotation selected")
+        
+        selectedCoordinates = view.annotation?.coordinate
+        detailCollectionView.reloadData()
+        
         moveDetailView(show: true, animate: true)
     }
     
@@ -62,8 +75,29 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
     // MARK:- Collection View Data Source Methods
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // TODO: Return the number of photos associated with the selected location
-        return 0
+        guard let managedContext = managedContext else {
+            NSLog("Failed to get coordinates for selected pin")
+            return 0
+        }
+        
+        guard let selectedCoordinates = selectedCoordinates else {
+            NSLog("Failed to get coordinates for selected pin")
+            return 0
+        }
+        
+        // Put together a predicated fetch for the location with the matching coordinates
+        let coordinatePredicate: NSPredicate = NSPredicate(format: "latitude = %@ AND longitude = %@", selectedCoordinates.latitude, selectedCoordinates.longitude)
+        let fetchRequest: NSFetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Location")
+        fetchRequest.predicate = coordinatePredicate
+        
+        // Run the fetch
+        do {
+            let results: [NSManagedObject] = try managedContext.fetch(fetchRequest)
+            return results.count
+        } catch let error as NSError {
+            print("Failed to fetch. \(error), \(error.userInfo)")
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
