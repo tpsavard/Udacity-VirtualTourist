@@ -75,29 +75,13 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
     // MARK:- Collection View Data Source Methods
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let managedContext = managedContext else {
-            NSLog("Failed to get coordinates for selected pin")
+        guard let sc = selectedCoordinates, let result = getLocationEntry(latitude: sc.latitude, longitude: sc.longitude) else {
+            NSLog("Failed to get entity for location")
             return 0
         }
         
-        guard let selectedCoordinates = selectedCoordinates else {
-            NSLog("Failed to get coordinates for selected pin")
-            return 0
-        }
-        
-        // Put together a predicated fetch for the location with the matching coordinates
-        let coordinatePredicate: NSPredicate = NSPredicate(format: "latitude = %@ AND longitude = %@", selectedCoordinates.latitude, selectedCoordinates.longitude)
-        let fetchRequest: NSFetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Location")
-        fetchRequest.predicate = coordinatePredicate
-        
-        // Run the fetch
-        do {
-            let results: [NSManagedObject] = try managedContext.fetch(fetchRequest)
-            return results.count
-        } catch let error as NSError {
-            print("Failed to fetch. \(error), \(error.userInfo)")
-            return 0
-        }
+        // TODO: Return the count of photos for the location
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -110,7 +94,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
         
         // Decorate & return the cell
         cell.PhotoView.image = photo
-
+        
         return cell
     }
     
@@ -130,7 +114,10 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
             mapView.addAnnotation(annotation)
             mapView.selectAnnotation(annotation, animated: false)
             
-            // TODO: Update the detail view
+            // TODO: Create the location entity
+            
+            // Update the detail view
+            refreshDetailView()
             
             // Show the detail view
             moveDetailView(show: true, animate: true)
@@ -144,6 +131,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
     
     @IBAction func refresh(_ sender: UIBarButtonItem) {
         print("refresh IBAction called")
+        refreshDetailView()
     }
     
     @IBAction func remove(_ sender: UIBarButtonItem) {
@@ -188,6 +176,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
     func refreshDetailView() {
         // Clear out the old photos
         
+        
         // Start the network indicator
         
         // Load the new photos
@@ -203,6 +192,29 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
     
     func finishRefresh() {
         // End the network indicator
+    }
+    
+    func getLocationEntry(latitude: Double, longitude: Double) -> NSManagedObject? {
+        guard let managedContext = managedContext else {
+            NSLog("Failed to get coordinates for selected pin")
+            return nil
+        }
+        
+        // Put together a predicated fetch for the location with the matching coordinates
+        let coordinatePredicate: NSPredicate = NSPredicate(format: "latitude = %@ AND longitude = %@", latitude, longitude)
+        let fetchRequest: NSFetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Location")
+        fetchRequest.predicate = coordinatePredicate
+        
+        // Run the fetch
+        do {
+            let results: [NSManagedObject] = try managedContext.fetch(fetchRequest)
+            
+            // There should only be one object for each coordinate
+            return results.first
+        } catch let error as NSError {
+            print("Failed to fetch. \(error) (\(latitude), \(longitude))")
+            return nil
+        }
     }
     
 }

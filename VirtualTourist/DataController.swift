@@ -60,4 +60,13 @@ class DataController {
         return (latitude, logitude)
     }
     
+    // MARK:- Flickr REST API methods
+    
+    class func getPhotos(
+        countUpdateSelector: (Int) -> (),
+        photoUpdateSelector: (NSIndexPath, UIImage) -> (),
+        finishSelector: () -> ()) {
+        
+    }
+    
 }
