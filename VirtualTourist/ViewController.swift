@@ -229,14 +229,12 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
             return
         }
         
-        // Create the new entity, with no photos
-        let location: Location = Location()
+        // Insert the new entity, with no photos
+        let location = NSEntityDescription.insertNewObject(forEntityName: "Location", into: managedContext) as! Location
+        
+        // Save the new values
         location.latitude = latitude
         location.longitude = longitude
-        
-        // Insert the new entity
-        managedContext.insert(location)
-       
         do {
             try managedContext.save()
         } catch {
