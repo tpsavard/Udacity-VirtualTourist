@@ -80,8 +80,12 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
             return 0
         }
         
-        // TODO: Return the count of photos for the location
-        return 0
+        // Return the count of photos for the location
+        if let count = result.photos?.count {
+            return count
+        } else {
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -114,7 +118,8 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
             mapView.addAnnotation(annotation)
             mapView.selectAnnotation(annotation, animated: false)
             
-            // TODO: Create the location entity
+            // Create the location entity
+            addLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
             
             // Update the detail view
             refreshDetailView()
@@ -176,7 +181,6 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
     func refreshDetailView() {
         // Clear out the old photos
         
-        
         // Start the network indicator
         
         // Load the new photos
@@ -194,7 +198,8 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
         // End the network indicator
     }
     
-    func getLocationEntry(latitude: Double, longitude: Double) -> NSManagedObject? {
+    func getLocationEntry(latitude: Double, longitude: Double) -> Location? {
+        // Sanity check
         guard let managedContext = managedContext else {
             NSLog("Failed to get coordinates for selected pin")
             return nil
@@ -210,11 +215,34 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
             let results: [NSManagedObject] = try managedContext.fetch(fetchRequest)
             
             // There should only be one object for each coordinate
-            return results.first
-        } catch let error as NSError {
-            print("Failed to fetch. \(error) (\(latitude), \(longitude))")
+            return results.first as? Location
+        } catch {
+            print("Failed to CD fetch. (\(latitude), \(longitude))")
             return nil
         }
+    }
+    
+    func addLocation(latitude: Double, longitude: Double) {
+        // Sanity check
+        guard let managedContext = managedContext else {
+            NSLog("Failed to get coordinates for selected pin")
+            return
+        }
+        
+        // Create the new entity, with no photos
+        let location: Location = Location()
+        location.latitude = latitude
+        location.longitude = longitude
+        
+        // Insert the new entity
+        managedContext.insert(location)
+       
+        do {
+            try managedContext.save()
+        } catch {
+            print("Failed to CD save.")
+        }
+        
     }
     
 }
