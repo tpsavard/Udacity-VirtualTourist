@@ -179,9 +179,31 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
     }
     
     func refreshDetailView() {
+        // Sanity check
+        guard let managedContext = managedContext else {
+            NSLog("Failed to get Managed Context")
+            return
+        }
+        
+        guard let sc = selectedCoordinates, let location = getLocationEntry(latitude: sc.latitude, longitude: sc.longitude) else {
+            NSLog("Failed to get entity for location")
+            return
+        }
+        
         // Clear out the old photos
+        if let photos: [Photo] = location.photos?.allObjects as? [Photo] {
+            for photo in photos {
+                managedContext.delete(photo)
+            }
+        }
+        do {
+            try managedContext.save()
+        } catch {
+            NSLog("Failed to clear previous photos for selected pin")
+        }
         
         // Start the network indicator
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         // Load the new photos
     }
@@ -196,6 +218,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
     
     func finishRefresh() {
         // End the network indicator
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
     func getLocationEntry(latitude: Double, longitude: Double) -> Location? {
