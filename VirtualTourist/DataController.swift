@@ -64,7 +64,7 @@ class DataController {
     
     class func getPhotos(
         countUpdateSelector: (Int) -> (),
-        photoUpdateSelector: (NSIndexPath, UIImage) -> (),
+        photoUpdateSelector: (Double, Double, Data, Int) -> (),
         finishSelector: () -> ()) {
         
     }

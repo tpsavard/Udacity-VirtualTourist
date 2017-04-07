@@ -152,6 +152,8 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
     // MARK:- Other Methods
     
     func moveDetailView(show: Bool, animate: Bool) {
+        print("moveDetailView called")
+        
         // Get the constraint values
         let uncheckedDistanceConstraint: NSLayoutConstraint? = view.constraints.first { $0.identifier == "bottom" }
         let uncheckedHeightConstraint: NSLayoutConstraint? = detailView.constraints.first { $0.identifier == "height" }
@@ -179,6 +181,8 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
     }
     
     func refreshDetailView() {
+        print("refreshDetailView called")
+        
         // Sanity check
         guard let managedContext = managedContext else {
             NSLog("Failed to get Managed Context")
@@ -191,11 +195,12 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
         }
         
         // Clear out the old photos
-        if let photos: [Photo] = location.photos?.allObjects as? [Photo] {
+        if let photos: [Photo] = location.photos?.array as? [Photo] {
             for photo in photos {
                 managedContext.delete(photo)
             }
         }
+        
         do {
             try managedContext.save()
         } catch {
@@ -206,22 +211,93 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         // Load the new photos
+        DataController.getPhotos(
+            countUpdateSelector: prepopulateDetailView(count:),
+            photoUpdateSelector: populateCell(latitude:longitude:content:index:),
+            finishSelector: finishRefresh)
     }
     
     func prepopulateDetailView(count: Int) {
-        // Refresh the count of photos
+        print("prepopulateDetailView called")
+        
+        // Sanity check
+        guard let managedContext = managedContext else {
+            NSLog("Failed to get Managed Context")
+            return
+        }
+        
+        // Get the location 
+        guard let sc = selectedCoordinates, let location = getLocationEntry(latitude: sc.latitude, longitude: sc.longitude) else {
+            NSLog("Failed to get entity for location")
+            return
+        }
+        
+        // Create the placeholder cells
+        for _ in 1...count  {
+            let photo = NSEntityDescription.insertNewObject(forEntityName: "Photo", into: managedContext) as! Photo
+            
+            photo.location = location
+            photo.image = nil
+        }
+        
+        // Save the cells
+        do {
+            try managedContext.save()
+        } catch {
+            NSLog("Failed to save placeholder photo entities")
+        }
+        
+        // Refresh the detail view
+        detailCollectionView.reloadData()
     }
     
-    func populateCell(indexPath: NSIndexPath, content: UIImage) {
-        // Referesh the contents of the photo cell
+    func populateCell(latitude: Double, longitude: Double, content: Data, index: Int) {
+        print("prepopulateDetailView called")
+        
+        // Sanity check
+        guard let managedContext = managedContext else {
+            NSLog("Failed to get Managed Context")
+            return
+        }
+        
+        // Get the location
+        guard let sc = selectedCoordinates, let location = getLocationEntry(latitude: sc.latitude, longitude: sc.longitude) else {
+            NSLog("Failed to get entity for location")
+            return
+        }
+        
+        // Find the next blank photo entity
+        if let photos: [Photo] = location.photos?.array as? [Photo] {
+            guard photos[index].image == nil else {
+                NSLog("Failed to get blank photo entity")
+                return
+            }
+            
+            photos[index].image = NSData(data: content)
+        }
+        
+        
+        // Attach the photo, save
+        do {
+            try managedContext.save()
+        } catch {
+            NSLog("Failed to save photo")
+        }
+        
+        // Update the corresponding detail view cell
+        detailCollectionView.reloadData()
     }
     
     func finishRefresh() {
+        print("finishRefresh called")
+        
         // End the network indicator
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
     func getLocationEntry(latitude: Double, longitude: Double) -> Location? {
+        print("getLocationEntry called")
+        
         // Sanity check
         guard let managedContext = managedContext else {
             NSLog("Failed to get coordinates for selected pin")
@@ -246,6 +322,8 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
     }
     
     func addLocation(latitude: Double, longitude: Double) {
+        print("addLocation called")
+        
         // Sanity check
         guard let managedContext = managedContext else {
             NSLog("Failed to get coordinates for selected pin")
@@ -258,6 +336,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
         // Save the new values
         location.latitude = latitude
         location.longitude = longitude
+        
         do {
             try managedContext.save()
         } catch {
