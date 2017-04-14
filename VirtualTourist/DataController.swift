@@ -15,6 +15,11 @@ class DataController {
     static let latitudeLabel: String = "latitude"
     static let logitudeLabel: String = "logitude"
     
+    enum Results {
+        case success
+        case failure
+    }
+    
     // MARK:- plist Methods
     
     class func saveMapView(latitude: Double, longitude: Double) {
@@ -60,12 +65,30 @@ class DataController {
         return (latitude, logitude)
     }
     
-    // MARK:- Flickr REST API methods
+    // MARK:- Flickr REST API Methods
     
-    class func getPhotos(
-        countUpdateSelector: (Int) -> (),
-        photoUpdateSelector: (Double, Double, Data, Int) -> (),
-        finishSelector: () -> ()) {
+    class func getPhotos(completionHandler: @escaping (Results, [String : Any]?) -> ()) {
+        // Build the request
+        
+//        A Model request:
+//        https://api.flickr.com/services/rest/
+//            ?
+//            method=flickr.photos.search&
+//            api_key=0104647d6e9b8b7d4b200da5bb2b8490&     (Hard-coded)
+//            lat=47.6062&
+//            lon=122.3321&
+//            extras=url_z&                                 (Returns the URL for a 640x640 sized image)
+//            format=json
+        
+        // Call Flickr
+        
+            // Catch any communication errors
+        
+            // Try to parse the information returned
+        
+    }
+    
+    class func getPhoto(url: String, latitude: Double, longitude: Double, index: Int, completionHandler: @escaping (Double, Double, Data, Int) -> ()) {
         
     }
     

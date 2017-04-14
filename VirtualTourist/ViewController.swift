@@ -211,10 +211,11 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         // Load the new photos
-        DataController.getPhotos(
-            countUpdateSelector: prepopulateDetailView(count:),
-            photoUpdateSelector: populateCell(latitude:longitude:content:index:),
-            finishSelector: finishRefresh)
+        DataController.getPhotos(completionHandler: processPhotos)
+    }
+    
+    func processPhotos(result: DataController.Results, data: [String : Any]?) {
+        
     }
     
     func prepopulateDetailView(count: Int) {
