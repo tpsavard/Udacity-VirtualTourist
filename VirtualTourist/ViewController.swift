@@ -211,11 +211,11 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         // Load the new photos
-        DataController.getPhotos(completionHandler: processPhotos)
+        DataController.getPhotos(latitude: sc.latitude, longitude: sc.longitude, completionHandler: processPhotos)
     }
     
     func processPhotos(result: DataController.Results, data: [String : Any]?) {
-        
+        // TODO: ...
     }
     
     func prepopulateDetailView(count: Int) {
@@ -306,7 +306,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UICollectionViewDataS
         }
         
         // Put together a predicated fetch for the location with the matching coordinates
-        let coordinatePredicate: NSPredicate = NSPredicate(format: "latitude = %@ AND longitude = %@", latitude, longitude)
+        let coordinatePredicate: NSPredicate = NSPredicate(format: "latitude = %lf AND longitude = %lf", latitude, longitude)
         let fetchRequest: NSFetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Location")
         fetchRequest.predicate = coordinatePredicate
         
